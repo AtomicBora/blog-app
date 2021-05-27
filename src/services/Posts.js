@@ -16,6 +16,9 @@ class PostsService {
         const {data} = await this.client.get(`posts/${id}`);
         return data;
     }
+    async add(post){
+        await this.client.post('posts', post);
+    }
 }
 
 export default new PostsService();
