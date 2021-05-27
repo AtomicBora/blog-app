@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-form @submit.prevent="createPost">
+    <b-form @submit.prevent="editOrCreate">
       <label for="PostTitle">Enter Title</label>
       <b-input
         id="PostTitle"
@@ -38,16 +38,29 @@ export default {
     };
   },
   methods: {
-    async createPost() {
-      console.log("Saljem post");
-      await HTTPService.add(this.post);
-      console.log("Uspesno dodat post");
-      this.$router.push({ name: 'AppPosts' });
+    async editOrCreate() {
+      if(!this.$route.params.id)
+      {
+        console.log("Saljem post");
+        await HTTPService.add(this.post);
+        console.log("Uspesno dodat post");
+        this.$router.push({ name: 'AppPosts' });
+      }
+      else{
+          console.log("Editovanje Posta!")
+          await HTTPService.edit(this.$route.params.id, this.post);
+          console.log("Uspesno poslata promena");
+      }
     },
     resetForm(){
         // this.$refs.AddPost.reset();
         Object.keys(this.post).forEach((key) => this.post[key] = '');
-    }
+    },
+  },
+  created() {
+      if(this.$route.params.id){
+          this.post = HTTPService.getByID(this.$route.params.id);
+      }
   },
 };
 </script>

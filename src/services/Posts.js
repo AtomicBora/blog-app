@@ -19,6 +19,9 @@ class PostsService {
     async add(post){
         await this.client.post('posts', post);
     }
+    async edit(id, post){
+        await this.client.put(`posts/${id}`, post)
+    }
 }
 
 export default new PostsService();
