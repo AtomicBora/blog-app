@@ -12,6 +12,10 @@ class PostsService {
         const {data} = await this.client.get('posts');
         return data;
     }
+    async getByID(id){
+        const {data} = await this.client.get(`posts/${id}`);
+        return data;
+    }
 }
 
 export default new PostsService();
