@@ -1,11 +1,11 @@
 <template>
     <b-container>
-        <b-card>
+        <b-card class="d-inline-flex">
             {{post.title}}
         </b-card>
-        <b-card-body>
+        <b-card>
             {{post.text}}
-        </b-card-body>
+        </b-card>
     </b-container>
 </template>
 <script>
