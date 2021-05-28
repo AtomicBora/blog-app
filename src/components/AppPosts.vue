@@ -23,7 +23,6 @@ export default {
     };
   },
   async created() {
-    console.log("Cao");
     try {
       this.posts = await HTTPService.getAll();
       console.log("Uspesno dobavljeni postovi");

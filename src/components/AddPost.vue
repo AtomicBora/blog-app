@@ -23,7 +23,12 @@
       >
       </b-textarea>
       <div class="mt-3">
-          <b-button type="submit" class="btn btn-primary">Create a post</b-button>
+          <span v-if="!this.$route.params.id">
+            <b-button type="submit" class="btn btn-primary">Create a post</b-button>
+          </span>
+          <span v-else>
+            <b-button type="submit" class="btn btn-primary">Edit Post</b-button>
+          </span>
           <b-button @click.prevent="resetForm" class="btn btn-danger">Clear all fields</b-button>
       </div>
     </b-form>
@@ -57,9 +62,13 @@ export default {
         Object.keys(this.post).forEach((key) => this.post[key] = '');
     },
   },
-  created() {
-      if(this.$route.params.id){
-          this.post = HTTPService.getByID(this.$route.params.id);
+  async created() {
+      try {
+        if(this.$route.params.id){
+          this.post = await HTTPService.getByID(this.$route.params.id);
+      }
+      } catch (error) {
+        console.log(error);
       }
   },
 };
