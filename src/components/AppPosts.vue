@@ -1,8 +1,8 @@
 <template>
   <b-container>
     <b-card v-for="post in posts" :key="post.id">
-      <b-card
-        >{{ post.title }}
+      <b-card>
+        {{ post.title }}
         <router-link
           :to="{ name: 'EditPost', params: { id: post.id } }"
           class="btn btn-info"
